@@ -91,5 +91,5 @@ func getWords(filename string) []string {
 		log.Fatal(err.Error())
 	}
 
-	return strings.Split(string(words), ",")
+	return strings.Split(string(words), "\n")
 }
