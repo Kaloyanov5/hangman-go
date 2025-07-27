@@ -25,7 +25,7 @@ var (
 
 func main() {
 	words := getWords(filename)
-	word = words[rand.IntN(len(words))]
+	word = strings.TrimSpace(words[rand.IntN(len(words))])
 
 	output := strings.Split(strings.Repeat("_", len(word)), "")
 
