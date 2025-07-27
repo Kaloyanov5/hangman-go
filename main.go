@@ -29,24 +29,29 @@ func main() {
 
 	output := strings.Split(strings.Repeat("_", len(word)), "")
 
-	for wrong <= 6 {
-		fmt.Println(hangman[wrong])
-		fmt.Println(strings.Join(output, ""))
+	for wrong < 6 {
+		fmt.Printf("\n%s\n%s\nGuesses: %s\n", hangman[wrong], strings.Join(output, ""), strings.Join(guesses, ", "))
 		if strings.Join(output, "") == word {
-			fmt.Println("winner")
+			fmt.Println("Winner!")
 			return
 		}
-		correct, guess := startGame(word)
+
+		correct, guess := tryLetter(word)
 		if !correct {
-			fmt.Println("Wrong guess!")
 			wrong++
 		} else {
-			output[strings.Index(word, guess)] = guess
+			for i, char := range word {
+				if string(char) == guess {
+					output[i] = guess
+				}
+			}
 		}
 	}
+	fmt.Println(hangman[wrong])
+	fmt.Println("Game Over!\nWord was: ", word)
 }
 
-func startGame(word string) (bool, string) {
+func tryLetter(word string) (bool, string) {
 	guess := ""
 	form := huh.NewForm(
 		huh.NewGroup(
