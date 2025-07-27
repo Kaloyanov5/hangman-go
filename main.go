@@ -65,6 +65,9 @@ func tryLetter(word string) (bool, string) {
 					if slices.Contains(guesses, guess) {
 						return errors.New("you have already entered this letter")
 					}
+					if !strings.ContainsRune("abcdefghijklmnopqrstuvwxyz", rune(s[0])) {
+						return errors.New("please enter a lowercase letter a-z")
+					}
 					return nil
 				}),
 		),
